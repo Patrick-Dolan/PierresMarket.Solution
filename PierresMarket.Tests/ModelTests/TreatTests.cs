@@ -1,10 +1,10 @@
 // using Microsoft.VisualStudio.TestTools.UnitTesting;
-// using ProjectName.Models;
+// using PierresMarket.Models;
 
-// namespace ProjectName.Tests
+// namespace PierresMarket.Tests
 // {
 //   [TestClass]
-//   public class ClassNameTests
+//   public class TreatTests
 //   {
 //     // Test methods go here
 //   }

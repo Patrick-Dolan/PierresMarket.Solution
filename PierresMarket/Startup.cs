@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProjectName.Models;
+using PierresMarket.Models;
 
-namespace ProjectName
+namespace PierresMarket
 {
   public class Startup
   {
@@ -26,11 +26,11 @@ namespace ProjectName
       services.AddMvc();
 
       services.AddEntityFrameworkMySql()
-        .AddDbContext<ProjectNameContext>(options => options
+        .AddDbContext<PierresMarketContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
 
       services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<ProjectNameContext>()
+        .AddEntityFrameworkStores<PierresMarketContext>()
         .AddDefaultTokenProviders();
 
       services.Configure<IdentityOptions>(options =>
