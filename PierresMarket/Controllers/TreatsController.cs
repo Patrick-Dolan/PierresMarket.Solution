@@ -33,6 +33,7 @@ namespace PierresMarket.Controllers
     public ActionResult Create(Treat treat, int FlavorId)
     {
       _db.Treats.Add(treat);
+      _db.SaveChanges();
       if(FlavorId != 0)
       {
         _db.FlavorTreats.Add(new FlavorTreat { TreatId = treat.TreatId, FlavorId = FlavorId});
@@ -47,6 +48,7 @@ namespace PierresMarket.Controllers
         .Include(treat => treat.JoinEntities)
         .ThenInclude(join => join.JoinEntities)
         .FirstOrDefault(entry => entry.TreatId == id);
+      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
       return View(foundTreat);
     }
 
@@ -88,6 +90,27 @@ namespace PierresMarket.Controllers
       _db.Treats.Remove(foundTreat);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public ActionResult AddFlavor(Treat treat, int FlavorId)
+    {
+      bool isDuplicate = _db.FlavorTreats.Any(join => join.TreatId == treat.TreatId && join.FlavorId == FlavorId);
+      if (FlavorId != 0 && isDuplicate == false)
+      {
+        _db.FlavorTreats.Add(new FlavorTreat() { TreatId = treat.TreatId, FlavorId = FlavorId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = treat.TreatId});
+    }
+
+    [HttpPost]
+    public ActionResult DeleteFlavor(int joinId)
+    {
+      var joinEntry = _db.FlavorTreats.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
+      _db.FlavorTreats.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = joinEntry.TreatId});
     }
   }
 }

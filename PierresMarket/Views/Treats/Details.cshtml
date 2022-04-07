@@ -25,14 +25,31 @@
         <ul>
           @foreach (var join in Model.JoinEntities)
           {
-            <li class="card-text">@Html.ActionLink($"{join.Flavor.Name}", "Details", "Flavors", new { id= join.Flavor.FlavorId })</li>
+            @using (Html.BeginForm("DeleteFlavor", "Treats"))
+            {
+              @Html.Hidden("joinId", @join.FlavorTreatId)
+              <p class="card-text">
+                <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
+                - @Html.ActionLink($"{join.Flavor.Name}", "Details", "Flavors", new { id= join.Flavor.FlavorId })
+              </p>
+            }
           }
         </ul>
+      }
+      @using (Html.BeginForm("AddFlavor", "Treats"))
+      {
+        @Html.HiddenFor(model => model.TreatId)
+
+        <div class="mb-3">
+          @Html.Label("Add flavor tag")
+          @Html.DropDownList("FlavorId", ViewBag.FlavorId, "Add selection", new { @class = "form-control"})
+        </div>
+
+        <input type="submit" value="Add flavor" class="btn btn-success" />
       }
     </div>
   </div>
 </div>
 
 <p>@Html.ActionLink("Edit treat", "Edit", new { id = Model.TreatId})</p>
-<p>@Html.ActionLink("Add Flavor", "AddFlavor", new { id = Model.TreatId})</p>
 <p>@Html.ActionLink("Delete treat", "Delete", new { id = Model.TreatId})</p>
