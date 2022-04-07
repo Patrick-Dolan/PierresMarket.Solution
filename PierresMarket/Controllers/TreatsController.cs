@@ -40,5 +40,14 @@ namespace PierresMarket.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult Details(int id)
+    {
+      Treat foundTreat = _db.Treats
+        .Include(treat => treat.JoinEntities)
+        .ThenInclude(join => join.JoinEntities)
+        .FirstOrDefault(entry => entry.TreatId == id);
+      return View(foundTreat);
+    }
   }
 }
