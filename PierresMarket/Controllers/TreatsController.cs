@@ -49,5 +49,27 @@ namespace PierresMarket.Controllers
         .FirstOrDefault(entry => entry.TreatId == id);
       return View(foundTreat);
     }
+
+    public ActionResult Edit(int id)
+    {
+      Treat foundTreat = _db.Treats.FirstOrDefault(entry => entry.TreatId == id);
+      return View(foundTreat);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Treat treat, int FlavorId)
+    {
+      if (treat.Name == null || treat.Price == 0 || treat.Description == null)
+      {
+        return RedirectToAction("Edit", new { id = treat.TreatId});
+      }
+      if (FlavorId != 0)
+      {
+        _db.FlavorTreats.Add(new FlavorTreat { TreatId = treat.TreatId, FlavorId = FlavorId});
+      }
+      _db.Entry(treat).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = treat.TreatId});
+    }
   }
 }
