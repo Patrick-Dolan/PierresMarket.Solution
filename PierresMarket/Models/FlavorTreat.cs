@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace PierresMarket.Models
 {
   public class FlavorTreat
@@ -11,5 +13,7 @@ namespace PierresMarket.Models
     public int FlavorId { get; set; }
     public virtual Treat Treat { get; set; }
     public virtual Flavor Flavor { get; set; }
+    public virtual ICollection<FlavorTreat> JoinEntities { get; set; }
+
   }
 }
