@@ -1,0 +1,39 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PierresMarket.Models.Treat
+
+<h2>Delete @Html.DisplayFor(model => model.Name)</h2>
+
+<div class="col">
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">@Model.Name</h5>
+      <hr>
+      <h6>Price</h6>
+      <p class="card-text">$@Model.Price.00</p>
+      <h6>Description</h6>
+      <p class="card-text">@Model.Description</p>
+      <h6>Flavors</h6>
+      @if (Model.JoinEntities.Count == 0)
+      {
+        <p>This treat doesnt have any flavor tags connected to it yet.</p>
+      }
+      else
+      {
+        <ul>
+          @foreach (var join in Model.JoinEntities)
+          {
+            <li class="card-text">@Html.ActionLink($"{join.Flavor.Name}", "Details", "Flavors", new { id= join.Flavor.FlavorId })</li>
+          }
+        </ul>
+      }
+    </div>
+  </div>
+</div>
+
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete treat" class="btn btn-danger" />
+}

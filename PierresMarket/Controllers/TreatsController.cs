@@ -71,5 +71,23 @@ namespace PierresMarket.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = treat.TreatId});
     }
+
+    public ActionResult Delete(int id)
+    {
+      Treat foundTreat = _db.Treats
+        .Include(treat => treat.JoinEntities)
+        .ThenInclude(join => join.JoinEntities)
+        .FirstOrDefault(entry => entry.TreatId == id);
+      return View(foundTreat);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      Treat foundTreat = _db.Treats.FirstOrDefault(entry => entry.TreatId == id);
+      _db.Treats.Remove(foundTreat);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
