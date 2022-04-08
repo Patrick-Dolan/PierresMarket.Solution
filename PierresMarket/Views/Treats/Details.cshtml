@@ -33,9 +33,7 @@
                   Delete
                 </button>
                 - @Html.ActionLink($"{join.Flavor.Name}", "Details", "Flavors", new { id= join.Flavor.FlavorId })
-
               </p>
-              
               <!-- Modal -->
               <div class="modal fade" id="flavor_@(join.FlavorTreatId)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="flavor_@(join.FlavorTreatId)Label" aria-hidden="true">
                 <div class="modal-dialog">
