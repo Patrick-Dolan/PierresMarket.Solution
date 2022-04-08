@@ -14,7 +14,7 @@
       <h6>Recipes</h6>
       @if (Model.JoinEntities.Count == 0)
       {
-        <p>This flavor doesnt have any recipes connected to it yet.</p>
+        <p>This treat doesnt have any recipes connected to it yet.</p>
       }
       else
       {
@@ -23,14 +23,36 @@
           <ul>
             @foreach (var join in Model.JoinEntities)
             {
-              @using (Html.BeginForm("DeleteTreat", "Flavors"))
-              {
-                @Html.Hidden("joinId", @join.FlavorTreatId)
-                <p>
-                  <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
-                  - @Html.ActionLink($"{join.Treat.Name}", "Details", "Treats", new { id= join.Treat.TreatId })
-                </p>
-              }
+              <!-- Button trigger modal -->
+              <p>
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#treat_@(join.FlavorTreatId)">
+                  Delete
+                </button>
+                - @Html.ActionLink($"{join.Treat.Name}", "Details", "Treats", new { id= join.Treat.TreatId })
+              </p>
+              <!-- Modal -->
+              <div class="modal fade" id="treat_@(join.FlavorTreatId)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="treat_@(join.FlavorTreatId)Label" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="treat_@(join.FlavorTreatId)Label">Delete Treat: @join.Treat.Name</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you want to delete @join.Treat.Name from the @Model.Name tag?</p>
+                      <p>If you want to re-add this tag to @join.Treat.Name you will need to reassign it manually.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      @using (Html.BeginForm("DeleteTreat", "Flavors"))
+                      {
+                        @Html.Hidden("joinId", @join.FlavorTreatId)
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
             }
           </ul>
         }
@@ -62,5 +84,5 @@
   </div>
 </div>
 
-<p>@Html.ActionLink("Edit flavor", "Edit", new { id = Model.FlavorId})</p>
-<p>@Html.ActionLink("Delete flavor", "Delete", new { id = Model.FlavorId})</p>
+<p>@Html.ActionLink("Edit treat", "Edit", new { id = Model.FlavorId})</p>
+<p>@Html.ActionLink("Delete treat", "Delete", new { id = Model.FlavorId})</p>
