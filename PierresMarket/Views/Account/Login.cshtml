@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+
+@using PierresMarket.ViewModels
+
+@model LoginViewModel
+
+
+@using (Html.BeginForm())
+{
+  <div class="col-md-6 mx-auto">
+    <h2>Log in with your account</h2>
+    <hr>
+    <div class="mb-3">
+      @Html.LabelFor(m => m.Email, new { @class = "form-label"})
+      @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required="required"})
+    </div>
+    <div class="mb-3">
+      @Html.LabelFor(m => m.Password, new { @class = "form-label"})
+      @Html.PasswordFor(m => m.Password, new { @class = "form-control", required="required"})
+    </div>
+    <button type="submit" class="btn btn-success btn-block">Log in</button>
+  </div>
+}
