@@ -20,6 +20,8 @@
       @Html.LabelFor(m => m.Password, new { @class = "form-label"})
       @Html.PasswordFor(m => m.Password, new { @class = "form-control", required="required"})
     </div>
-    <button type="submit" class="btn btn-success btn-block">Log in</button>
+    <button type="submit" class="btn btn-success btn-block mb-3">Log in</button>
+    <p class="text-muted">New to Pierre's? @Html.ActionLink("Create an account", "Register")</p>
+
   </div>
 }

@@ -25,7 +25,8 @@
         @Html.LabelFor(user=> user.ConfirmPassword, new { @class = "form-label"})
         @Html.PasswordFor(user=> user.ConfirmPassword, new { @class = "form-control", required="required"})
       </div>
-      <button type="submit" class="btn btn-success btn-block">Register</button>
+      <button type="submit" class="btn btn-success btn-block mb-3">Register</button>
+      <p class="text-muted">Already have an account? @Html.ActionLink("Login", "Login")</p>
     </div>
   </div>
 }
