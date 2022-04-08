@@ -46,6 +46,7 @@ namespace PierresMarket.Controllers
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       Treat foundTreat = _db.Treats

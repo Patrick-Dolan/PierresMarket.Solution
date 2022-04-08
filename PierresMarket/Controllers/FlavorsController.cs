@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace PierresMarket.Controllers
 {
+  [Authorize]
   public class FlavorsController : Controller
   {
     private readonly PierresMarketContext _db;
@@ -18,6 +19,7 @@ namespace PierresMarket.Controllers
       _db = db;
     }
 
+    [AllowAnonymous]
     public ActionResult Index()
     {
       return View(_db.Flavors.ToList());
@@ -42,6 +44,7 @@ namespace PierresMarket.Controllers
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       Flavor foundFlavor = _db.Flavors
