@@ -19,7 +19,13 @@ else
         <h4>Treats</h4>
         @foreach (Treat treat in Model)
         {
-          <p>@Html.ActionLink($"{treat.Name}", "Details", "Treats", new { id = treat.TreatId})</p>
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">@Html.ActionLink($"{treat.Name}", "Details", "Treats", new { id = treat.TreatId})</h5>
+              <hr>
+              <p class="card-text">@treat.Description</p>
+            </div>
+          </div>
         }
       </div>
     }
