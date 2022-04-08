@@ -52,6 +52,46 @@ namespace PierresMarket.Controllers
       return View(foundFlavor);
     }
 
+    public ActionResult Edit(int id)
+    {
+      Flavor foundFlavor = _db.Flavors.FirstOrDefault(entry => entry.FlavorId == id);
+      return View(foundFlavor);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Flavor flavor, int TreatId)
+    {
+      if (flavor.Name == null)
+      {
+        return RedirectToAction("Edit", new { id = flavor.FlavorId});
+      }
+      if (TreatId != 0)
+      {
+        _db.FlavorTreats.Add(new FlavorTreat { FlavorId = flavor.FlavorId, TreatId = TreatId});
+      }
+      _db.Entry(flavor).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = flavor.FlavorId});
+    }
+
+    public ActionResult Delete(int id)
+    {
+      Flavor foundFlavor = _db.Flavors
+        .Include(flavor => flavor.JoinEntities)
+        .ThenInclude(join => join.JoinEntities)
+        .FirstOrDefault(entry => entry.FlavorId == id);
+      return View(foundFlavor);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      Flavor foundFlavor = _db.Flavors.FirstOrDefault(entry => entry.FlavorId == id);
+      _db.Flavors.Remove(foundFlavor);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
     [HttpPost]
     public ActionResult AddTreat(Flavor flavor, int TreatId)
     {
