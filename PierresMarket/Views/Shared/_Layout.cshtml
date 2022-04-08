@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <h1>Pierre's Sweet and Savory Treats</h1>
-      <ul class="nav row">
+      <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
           @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link"})
         </li>
@@ -19,15 +19,33 @@
         <li class="nav-item">
           @Html.ActionLink("Flavors", "Index", "Flavors", null, new { @class = "nav-link"})
         </li>
-        <li class="nav-item">
-          @if (User.Identity.IsAuthenticated)
+        <li class="nav-item dropdown">
+          @if(User.Identity.IsAuthenticated)
           {
-            @Html.ActionLink($"{User.Identity.Name}", "Index", "Account", null, new { @class = "nav-link"})
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">@User.Identity.Name</a>
           }
           else
           {
-            @Html.ActionLink("Account", "Index", "Account", null, new { @class = "nav-link"})
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Sign in</a>
           }
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href='@Url.Action("Index", "Account")'>Account</a></li>
+            @if (!User.Identity.IsAuthenticated)
+            {
+              <li><a class="dropdown-item" href='@Url.Action("Register", "Account")'>Register for an account</a></li>
+              <li><a class="dropdown-item" href='@Url.Action("Login", "Account")'>Login</a></li>
+            }
+            else
+            {
+              <li><hr class="dropdown-divider"></li>
+              <li class="text-align-left">
+                  @using (Html.BeginForm("LogOff", "Account"))
+                  {
+                    <button type="submit" class="btn btn-block">Log out</button>
+                  }
+              </li>
+            }
+          </ul>
         </li>
       </ul>
       <hr>
