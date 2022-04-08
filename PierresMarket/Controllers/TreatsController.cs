@@ -37,8 +37,8 @@ namespace PierresMarket.Controllers
       if(FlavorId != 0)
       {
         _db.FlavorTreats.Add(new FlavorTreat { TreatId = treat.TreatId, FlavorId = FlavorId});
+        _db.SaveChanges();
       }
-      _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
