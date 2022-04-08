@@ -4,7 +4,13 @@
 @using PierresMarket.Models
 @model List<PierresMarket.Models.Treat>
 
-<h2>Welcome to Pierres Sweet and Savory treats</h2>
+<div class="card bg-dark">
+  <img src="~/img/bakery-splash.jpg" class="card-img" alt="bakery image">
+  <div class="card-img-overlay">
+    <h2 class="card-title text-center shadow bg-light rounded py-3 mx-4">Welcome to Pierres Sweet and Savory treats</h2>
+  </div>
+</div>
+
 @if (Model.Count == 0 && ViewBag.Flavors.Count == 0)
 {
   <p>There are currently no recipes or flavor tags in the system. Add some and you'll see them displayed on this page.</p>
