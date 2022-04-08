@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using PierresMarket.Models;
 using System.Threading.Tasks;
+using PierresMarket.ViewModels;
 
 namespace ToDoList.Controllers
 {
@@ -28,19 +29,19 @@ namespace ToDoList.Controllers
             return View();
         }
 
-        // [HttpPost]
-        // public async Task<ActionResult> Register (RegisterViewModel model)
-        // {
-        //     var user = new ApplicationUser { UserName = model.Email };
-        //     IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-        //     if (result.Succeeded)
-        //     {
-        //         return RedirectToAction("Index");
-        //     }
-        //     else
-        //     {
-        //         return View();
-        //     }
-        // }
+        [HttpPost]
+        public async Task<ActionResult> Register (RegisterViewModel model)
+        {
+            var user = new ApplicationUser { UserName = model.Email };
+            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
     }
 }
