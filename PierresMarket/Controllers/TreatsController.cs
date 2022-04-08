@@ -10,14 +10,18 @@ using System.Threading.Tasks;
 
 namespace PierresMarket.Controllers
 {
+  [Authorize]
   public class TreatsController : Controller
   {
     private readonly PierresMarketContext _db;
-    public TreatsController(PierresMarketContext db)
+    private readonly UserManager<ApplicationUser> _userManager;
+    public TreatsController(UserManager<ApplicationUser> userManager, PierresMarketContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
+    [AllowAnonymous]
     public ActionResult Index()
     {
       return View(_db.Treats.ToList());
