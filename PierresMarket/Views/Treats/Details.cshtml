@@ -22,30 +22,45 @@
       }
       else
       {
-        <ul>
-          @foreach (var join in Model.JoinEntities)
-          {
-            @using (Html.BeginForm("DeleteFlavor", "Treats"))
+        @if (User.Identity.IsAuthenticated)
+        {
+          <ul>
+            @foreach (var join in Model.JoinEntities)
             {
-              @Html.Hidden("joinId", @join.FlavorTreatId)
-              <p class="card-text">
-                <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
-                - @Html.ActionLink($"{join.Flavor.Name}", "Details", "Flavors", new { id= join.Flavor.FlavorId })
-              </p>
+              @using (Html.BeginForm("DeleteFlavor", "Treats"))
+              {
+                @Html.Hidden("joinId", @join.FlavorTreatId)
+                <p class="card-text">
+                  <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
+                  - @Html.ActionLink($"{join.Flavor.Name}", "Details", "Flavors", new { id= join.Flavor.FlavorId })
+                </p>
+              }
             }
-          }
-        </ul>
+          </ul>
+        }
+        else
+        {
+          <ul>
+            @foreach (var join in Model.JoinEntities)
+            {
+              @Html.ActionLink($"{join.Flavor.Name}", "Details", "Flavors", new { id= join.Flavor.FlavorId })
+            }
+          </ul>
+        }
       }
-      @using (Html.BeginForm("AddFlavor", "Treats"))
+      @if (User.Identity.IsAuthenticated)
       {
-        @Html.HiddenFor(model => model.TreatId)
+        @using (Html.BeginForm("AddFlavor", "Treats"))
+        {
+          @Html.HiddenFor(model => model.TreatId)
 
-        <div class="mb-3">
-          @Html.Label("Add flavor tag")
-          @Html.DropDownList("FlavorId", ViewBag.FlavorId, "Add selection", new { @class = "form-control"})
-        </div>
+          <div class="mb-3">
+            @Html.Label("Add flavor tag")
+            @Html.DropDownList("FlavorId", ViewBag.FlavorId, "Add selection", new { @class = "form-control"})
+          </div>
 
-        <input type="submit" value="Add flavor" class="btn btn-success" />
+          <input type="submit" value="Add flavor" class="btn btn-success" />
+        }
       }
     </div>
   </div>
