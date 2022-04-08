@@ -14,8 +14,10 @@ namespace PierresMarket.Controllers
   public class FlavorsController : Controller
   {
     private readonly PierresMarketContext _db;
-    public FlavorsController(PierresMarketContext db)
+    private readonly UserManager<ApplicationUser> _userManager;
+    public FlavorsController(UserManager<ApplicationUser> userManager, PierresMarketContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
@@ -32,8 +34,11 @@ namespace PierresMarket.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Flavor flavor, int TreatId)
+    public async Task<ActionResult> Create(Flavor flavor, int TreatId)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      flavor.User = currentUser;
       _db.Flavors.Add(flavor);
       _db.SaveChanges();
       if (TreatId != 0)
