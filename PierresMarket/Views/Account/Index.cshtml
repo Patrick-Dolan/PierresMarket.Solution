@@ -4,5 +4,16 @@
 
 <h2>Account</h2>
 
-<p>@Html.ActionLink("Register", "Register")</p>
-<p>@Html.ActionLink("Login", "Login")</p>
+@if (User.Identity.IsAuthenticated)
+{
+  <p>Hello @User.Identity.Name</p>
+  @using (Html.BeginForm("LogOff", "Account"))
+  {
+    <button type="submit" class="btn btn-danger">Log out</button>
+  }
+}
+else
+{
+  <p>@Html.ActionLink("Register", "Register")</p>
+  <p>@Html.ActionLink("Login", "Login")</p>
+}
