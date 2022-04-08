@@ -39,7 +39,7 @@
           <ul>
             @foreach (var join in Model.JoinEntities)
             {
-              @Html.ActionLink($"{join.Treat.Name}", "Details", "Treats", new { id= join.Treat.TreatId })
+              <li>@Html.ActionLink($"{join.Treat.Name}", "Details", "Treats", new { id= join.Treat.TreatId })</li>
             }
           </ul>
         }
