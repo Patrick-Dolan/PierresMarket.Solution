@@ -1,0 +1,48 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PierresMarket.Models.Flavor
+
+<h2>Flavor Details</h2>
+
+<div class="col">
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">@Model.Name</h5>
+      <hr>
+      <h6>Recipes</h6>
+      @if (Model.JoinEntities.Count == 0)
+      {
+        <p>This flavor doesnt have any recipes connected to it yet.</p>
+      }
+      else
+      {
+        <ul>
+          @foreach (var join in Model.JoinEntities)
+          {
+            @using (Html.BeginForm("DeleteTreat", "Flavors"))
+            {
+              @Html.Hidden("joinId", @join.FlavorTreatId)
+              <p class="card-text">
+                <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
+                - @Html.ActionLink($"{join.Treat.Name}", "Details", "Treats", new { id= join.Treat.TreatId })
+              </p>
+            }
+          }
+        </ul>
+      }
+      @using (Html.BeginForm("AddTreat", "Flavors"))
+      {
+        @Html.HiddenFor(model => model.FlavorId)
+
+        <div class="mb-3">
+          @Html.Label("Add treat")
+          @Html.DropDownList("TreatId", ViewBag.TreatId, "Add selection", new { @class = "form-control"})
+        </div>
+
+        <input type="submit" value="Add treat" class="btn btn-success" />
+      }
+    </div>
+  </div>
+</div>
