@@ -1,53 +1,68 @@
+@{
+  string pageName = ViewContext.RouteData.Values["controller"].ToString();
+}
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/bootstrap.css">
     <link rel="stylesheet" href="~/css/styles.css">
   </head>
   <body>
     <div class="container">
-      <h1>Pierre's Sweet and Savory Treats</h1>
-      <ul class="nav nav-pills nav-fill">
-        <li class="nav-item">
-          @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link"})
-        </li>
-        <li class="nav-item">
-          @Html.ActionLink("Treats", "Index", "Treats", null, new { @class = "nav-link"})
-        </li>
-        <li class="nav-item">
-          @Html.ActionLink("Flavors", "Index", "Flavors", null, new { @class = "nav-link"})
-        </li>
-        <li class="nav-item dropdown">
-          @if(User.Identity.IsAuthenticated)
-          {
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">@User.Identity.Name</a>
-          }
-          else
-          {
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Account</a>
-          }
-          <ul class="dropdown-menu">
-            @if (!User.Identity.IsAuthenticated)
-            {
-              <li><a class="dropdown-item" href='@Url.Action("Register", "Account")'>Register account</a></li>
-              <li><a class="dropdown-item" href='@Url.Action("Login", "Account")'>Login</a></li>
-            }
-            else
-            {
-              <li><a class="dropdown-item" href='@Url.Action("Index", "Account")'>My account</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li class="text-align-left">
-                  @using (Html.BeginForm("LogOff", "Account"))
-                  {
-                    <button type="submit" class="btn btn-block">Log out</button>
-                  }
+      <h1>Pierre's Sweet and Savory Treats @pageName</h1>
+      <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          @Html.ActionLink("Pierre's Market", "Index", "Home", null, new { @class = "navbar-brand"})
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a href='@Url.Action("Index", "Home")' class='nav-link @(pageName == "Home" ? "active" : "")'>Home</a>
               </li>
-            }
-          </ul>
-        </li>
-      </ul>
+              <li class="nav-item">
+                <a href='@Url.Action("Index", "Treats")' class='nav-link @(pageName == "Treats" ? "active" : "")'>Treats</a>
+              </li>
+              <li class="nav-item">
+                <a href='@Url.Action("Index", "Flavors")' class='nav-link @(pageName == "Flavors" ? "active" : "")'>Flavors</a>
+              </li>
+              <li class="nav-item dropdown">
+                @if(User.Identity.IsAuthenticated)
+                {
+                  <a class='nav-link dropdown-toggle @(pageName == "Account" ? "active" : "")' data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">@User.Identity.Name</a>
+                }
+                else
+                {
+                  <a class='nav-link dropdown-toggle @(pageName == "Account" ? "active" : "")' data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Account</a>
+                }
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  @if (!User.Identity.IsAuthenticated)
+                  {
+                    <li><a class="dropdown-item" href='@Url.Action("Register", "Account")'>Register account</a></li>
+                    <li><a class="dropdown-item" href='@Url.Action("Login", "Account")'>Login</a></li>
+                  }
+                  else
+                  {
+                    <li><a class="dropdown-item" href='@Url.Action("Index", "Account")'>My account</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        @using (Html.BeginForm("LogOff", "Account"))
+                        {
+                          <button type="submit" class="btn btn-block dropdown-item">Log out</button>
+                        }
+                    </li>
+                  }
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
       <hr>
       @RenderBody()
     </div>
