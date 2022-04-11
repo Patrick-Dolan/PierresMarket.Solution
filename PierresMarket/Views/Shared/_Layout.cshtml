@@ -13,10 +13,12 @@
   </head>
   <body>
     <div class="container">
-      <h1>Pierre's Sweet and Savory Treats @pageName</h1>
       <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          @Html.ActionLink("Pierre's Market", "Index", "Home", null, new { @class = "navbar-brand"})
+          <a href='@Url.Action("Index", "Home")' class='navbar-brand @(pageName == "Home" ? "active" : "")'>
+            <img src="~/img/bakery-icon.png" alt="" width="52" height="30" class="d-inline-block align-text-top">
+            Pierre's Market
+          </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
