@@ -54,10 +54,10 @@
                     <li><a class="dropdown-item" href='@Url.Action("Index", "Account")'>My account</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        @using (Html.BeginForm("LogOff", "Account"))
-                        {
-                          <button type="submit" class="btn btn-block dropdown-item">Log out</button>
-                        }
+                      @using (Html.BeginForm("LogOff", "Account"))
+                      {
+                        <button type="submit" class="btn btn-block dropdown-item">Log out</button>
+                      }
                     </li>
                   }
                 </ul>
