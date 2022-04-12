@@ -6,11 +6,10 @@
 
 @model RegisterViewModel
 
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post))
-{
-  <div class="row">
-    <div class="col-md-5 mx-auto">
+<div class="d-flex">
+  <div class="col-md-5 card mx-auto">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+    {
       <h2 class="text-center">Sign up</h2>
       <hr>
       <div class="mb-3">
@@ -27,6 +26,5 @@
       </div>
       <button type="submit" class="btn btn-success btn-block mb-3">Register</button>
       <p class="text-muted text-center">Already have an account? @Html.ActionLink("Login", "Login")</p>
-    </div>
-  </div>
-}
+    }
+</div>

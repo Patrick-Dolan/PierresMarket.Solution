@@ -6,22 +6,22 @@
 
 @model LoginViewModel
 
-
-@using (Html.BeginForm())
-{
-  <div class="col-md-5 mx-auto">
-    <h2 class="text-center">Sign in</h2>
-    <hr>
-    <div class="mb-3">
-      @Html.LabelFor(m => m.Email, new { @class = "form-label"})
-      @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required="required"})
-    </div>
-    <div class="mb-3">
-      @Html.LabelFor(m => m.Password, new { @class = "form-label"})
-      @Html.PasswordFor(m => m.Password, new { @class = "form-control", required="required"})
-    </div>
-    <button type="submit" class="btn btn-success btn-block mb-3">Log in</button>
-    <p class="text-muted text-center">New to Pierre's? @Html.ActionLink("Create an account", "Register")</p>
-
+<div class="d-flex">
+  <div class="col-md-5 card mx-auto">
+    @using (Html.BeginForm())
+    {
+      <h2 class="text-center">Sign in</h2>
+      <hr>
+      <div class="mb-3">
+        @Html.LabelFor(m => m.Email, new { @class = "form-label"})
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required="required"})
+      </div>
+      <div class="mb-3">
+        @Html.LabelFor(m => m.Password, new { @class = "form-label"})
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", required="required"})
+      </div>
+      <button type="submit" class="btn btn-success btn-block mb-3">Log in</button>
+      <p class="text-muted text-center">New to Pierre's? @Html.ActionLink("Create an account", "Register")</p>
+    }
   </div>
-}
+</div>
