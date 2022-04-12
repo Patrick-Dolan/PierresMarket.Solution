@@ -4,20 +4,17 @@
 @using PierresMarket.Models
 @model List<PierresMarket.Models.Treat>
 
-<div class="card bg-dark">
-  <img src="~/img/bakery-splash.jpg" class="card-img" alt="bakery image">
-  <div class="card-img-overlay">
-    <h2 class="card-title text-center shadow bg-light rounded py-3 mx-4">Welcome to Pierres Sweet and Savory treats</h2>
-  </div>
-</div>
+<h2 class="text-center">Welcome to Pierres Sweet and Savory treats</h2>
 
 @if (Model.Count == 0 && ViewBag.Flavors.Count == 0)
 {
-  <p>There are currently no recipes or flavor tags in the system. Add some and you'll see them displayed on this page.</p>
+  <p class="text-center">There are currently no recipes or flavor tags in the system. Add some and you'll see them displayed on this page.</p>
+  <hr>
 }
 else
 {
-  <p>Feel free to browse all our delicious treats below or using the links above.</p>
+  <p class="text-center">Feel free to browse all our delicious treats below or using the links above.</p>
+  <hr>
   <div class="row">
     @if (Model.Count != 0)
     {
