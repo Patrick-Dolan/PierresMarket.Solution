@@ -9,9 +9,9 @@
 <div class="col">
   <div class="card border-primary mb-3">
     <div class="card-body">
-      <h5 class="card-title">@Model.Name</h5>
+      <h4 class="card-title">@Model.Name</h4>
       <hr>
-      <h6>@Model.Name Treats</h6>
+      <h6><strong>@Model.Name Treats</strong></h6>
       @if (Model.JoinEntities.Count == 0)
       {
         <p>This flavor doesnt have any treats connected to it yet.</p>
@@ -77,7 +77,7 @@
             @Html.DropDownList("TreatId", ViewBag.TreatId, "Add selection", new { @class = "form-control  col-md-5"})
           </div>
 
-          <input type="submit" value="Add treat" class="btn btn-success  col-md-5" />
+          <input type="submit" value="Add treat" class="btn btn-dark  col-md-5" />
         }
       }
     </div>

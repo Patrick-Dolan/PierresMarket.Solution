@@ -9,13 +9,13 @@
 <div class="col">
   <div class="card border-primary mb-3">
     <div class="card-body">
-      <h5 class="card-title">@Model.Name</h5>
+      <h4 class="card-title">@Model.Name</h4>
       <hr>
-      <h6>Price</h6>
+      <h6><strong>Price</strong></h6>
       <p class="card-text">$@Model.Price.00</p>
-      <h6>Description</h6>
+      <h6><strong>Description</strong></h6>
       <p class="card-text">@Model.Description</p>
-      <h6>Flavors</h6>
+      <h6><strong>Flavors</strong></h6>
       @if (Model.JoinEntities.Count == 0)
       {
         <p>This treat doesnt have any flavor tags connected to it yet.</p>
@@ -81,7 +81,7 @@
             @Html.DropDownList("FlavorId", ViewBag.FlavorId, "Add selection", new { @class = "form-control col-md-5"})
           </div>
 
-          <input type="submit" value="Add flavor" class="btn btn-success col-md-5" />
+          <input type="submit" value="Add flavor" class="btn btn-dark col-md-5" />
         }
       }
     </div>
