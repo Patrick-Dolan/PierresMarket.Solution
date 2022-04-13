@@ -11,6 +11,14 @@
     <div class="card-body">
       <h4 class="card-title">@Model.Name</h4>
       <hr>
+      @if (Model.ImageName == null)
+      {
+        <img src='~/img/DefaultTreatImage.png' class="img-thumbnail rounded float-start mr-3 bg-light px-2 py-2">
+      }
+      else
+      {
+        <img src='@Url.Content("~/img/TreatImages/" + Model.ImageName)' class="img-thumbnail rounded float-start mr-3 bg-light px-2 py-2">
+      }
       <h6><strong>Price</strong></h6>
       <p class="card-text">$@Model.Price.00</p>
       <h6><strong>Description</strong></h6>
