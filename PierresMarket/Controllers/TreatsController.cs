@@ -44,7 +44,7 @@ namespace PierresMarket.Controllers
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
       treat.User = currentUser;
-      //Image info
+      //Image handling
       string wwwRootPath = _hostEnvironment.WebRootPath;
       string fileName = Path.GetFileNameWithoutExtension(treat.ImageFile.FileName);
       string extention = Path.GetExtension(treat.ImageFile.FileName);
@@ -54,6 +54,7 @@ namespace PierresMarket.Controllers
       {
         await treat.ImageFile.CopyToAsync(fileStream);
       }
+      // Add treat to db
       _db.Treats.Add(treat);
       _db.SaveChanges();
       if(FlavorId != 0)
@@ -107,11 +108,19 @@ namespace PierresMarket.Controllers
     }
 
     [HttpPost, ActionName("Delete")]
-    public ActionResult DeleteConfirmed(int id)
+    public async Task<IActionResult> DeleteConfirmed(int id)
     {
-      Treat foundTreat = _db.Treats.FirstOrDefault(entry => entry.TreatId == id);
+      // Treat foundTreat = _db.Treats.FirstOrDefault(entry => entry.TreatId == id);
+      Treat foundTreat = await _db.Treats.FindAsync(id);
+      //Delete image from wwwroot/img/TreatImages/
+      var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "img/TreatImages/", foundTreat.ImageName);
+      if (System.IO.File.Exists(imagePath))
+      {
+        System.IO.File.Delete(imagePath);
+      }
+      //Delete treat from db
       _db.Treats.Remove(foundTreat);
-      _db.SaveChanges();
+      await _db.SaveChangesAsync();
       return RedirectToAction("Index");
     }
 
