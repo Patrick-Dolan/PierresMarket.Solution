@@ -110,13 +110,15 @@ namespace PierresMarket.Controllers
     [HttpPost, ActionName("Delete")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-      // Treat foundTreat = _db.Treats.FirstOrDefault(entry => entry.TreatId == id);
       Treat foundTreat = await _db.Treats.FindAsync(id);
       //Delete image from wwwroot/img/TreatImages/
-      var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "img/TreatImages/", foundTreat.ImageName);
-      if (System.IO.File.Exists(imagePath))
+      if (foundTreat.ImageName != null)
       {
-        System.IO.File.Delete(imagePath);
+        var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "img/TreatImages/", foundTreat.ImageName);
+        if (System.IO.File.Exists(imagePath))
+        {
+          System.IO.File.Delete(imagePath);
+        }
       }
       //Delete treat from db
       _db.Treats.Remove(foundTreat);
