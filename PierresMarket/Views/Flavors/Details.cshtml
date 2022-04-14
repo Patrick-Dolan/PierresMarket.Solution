@@ -80,9 +80,9 @@
         {
           @Html.HiddenFor(model => model.FlavorId)
 
-          <div class="mb-3">
+          <div class="mb-1 col-md-5">
             @Html.Label("Add treat")
-            @Html.DropDownList("TreatId", ViewBag.TreatId, "Add selection", new { @class = "form-control  col-md-5"})
+            @Html.DropDownList("TreatId", ViewBag.TreatId, "Add selection", new { @class = "form-control"})
           </div>
 
           <input type="submit" value="Add treat" class="btn btn-dark  col-md-5" />
