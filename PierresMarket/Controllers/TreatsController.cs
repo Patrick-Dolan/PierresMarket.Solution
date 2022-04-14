@@ -45,14 +45,17 @@ namespace PierresMarket.Controllers
       var currentUser = await _userManager.FindByIdAsync(userId);
       treat.User = currentUser;
       //Image handling
-      string wwwRootPath = _hostEnvironment.WebRootPath;
-      string fileName = Path.GetFileNameWithoutExtension(treat.ImageFile.FileName);
-      string extention = Path.GetExtension(treat.ImageFile.FileName);
-      treat.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssffff") + extention;
-      string path = Path.Combine(wwwRootPath + "/img/TreatImages/", fileName);
-      using (var fileStream = new FileStream(path, FileMode.Create))
+      if (treat.ImageFile != null)
       {
-        await treat.ImageFile.CopyToAsync(fileStream);
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        string fileName = Path.GetFileNameWithoutExtension(treat.ImageFile.FileName);
+        string extention = Path.GetExtension(treat.ImageFile.FileName);
+        treat.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssffff") + extention;
+        string path = Path.Combine(wwwRootPath + "/img/TreatImages/", fileName);
+        using (var fileStream = new FileStream(path, FileMode.Create))
+        {
+          await treat.ImageFile.CopyToAsync(fileStream);
+        }
       }
       // Add treat to db
       _db.Treats.Add(treat);
