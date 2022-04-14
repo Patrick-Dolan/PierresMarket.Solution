@@ -9,89 +9,94 @@
 <div class="col">
   <div class="card border-primary mb-3">
     <div class="card-body">
-      <!-- TODO Add columns for info -->
-      @if (Model.ImageName == null)
-      {
-        <img src='~/img/DefaultTreatImage.png' class="img-thumbnail rounded float-start mr-3 bg-light px-2 py-2">
-      }
-      else
-      {
-        <img src='@Url.Content("~/img/TreatImages/" + Model.ImageName)' class="img-thumbnail rounded float-start mr-3 bg-light px-2 py-2">
-      }
-      <h4 class="card-title"><strong>@Model.Name</strong></h4>
-      <h6><strong>Price</strong></h6>
-      <p class="card-text">$@Model.Price.00</p>
-      <h6><strong>Description</strong></h6>
-      <p class="card-text">@Model.Description</p>
-      <h6><strong>Flavors</strong></h6>
-      @if (Model.JoinEntities.Count == 0)
-      {
-        <p>This treat doesnt have any flavor tags connected to it yet.</p>
-      }
-      else
-      {
-        @if (User.Identity.IsAuthenticated)
-        {
-          <ul>
-            @foreach (var join in Model.JoinEntities)
+      <div class="row">
+        <div class="col-md-4">
+          @if (Model.ImageName == null)
+          {
+            <img src='~/img/DefaultTreatImage.png' class="img-thumbnail rounded mr-3 bg-light px-2 py-2 details-image">
+          }
+          else
+          {
+            <img src='@Url.Content("~/img/TreatImages/" + Model.ImageName)' class="img-thumbnail rounded mr-3 bg-light px-2 py-2">
+          }
+        </div>
+        <div class="col-md-8">
+          <h4 class="card-title"><strong>@Model.Name</strong></h4>
+          <h6><strong>Price</strong></h6>
+          <p class="card-text">$@Model.Price.00</p>
+          <h6><strong>Description</strong></h6>
+          <p class="card-text">@Model.Description</p>
+          <h6><strong>Flavors</strong></h6>
+          @if (Model.JoinEntities.Count == 0)
+          {
+            <p>This treat doesnt have any flavor tags connected to it yet.</p>
+          }
+          else
+          {
+            @if (User.Identity.IsAuthenticated)
             {
-              <!-- Button trigger modal -->
-              <p>
-                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#flavor_@(join.FlavorTreatId)">
-                  Delete
-                </button>
-                - @Html.ActionLink($"{join.Flavor.Name}", "Details", "Flavors", new { id= join.Flavor.FlavorId })
-              </p>
-              <!-- Modal -->
-              <div class="modal fade" id="flavor_@(join.FlavorTreatId)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="flavor_@(join.FlavorTreatId)Label" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="flavor_@(join.FlavorTreatId)Label">Delete Flavor: @join.Flavor.Name</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <p>Are you sure you want to delete @join.Flavor.Name from @Model.Name?</p>
-                      <p>If you want to re-add @Model.Name to the @join.Flavor.Name tag you will need to reassign it manually.</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      @using (Html.BeginForm("DeleteFlavor", "Treats"))
-                      {
-                        @Html.Hidden("joinId", @join.FlavorTreatId)
-                        <input type="submit" value="Delete" class="btn btn-danger" />
-                      }
+              <ul>
+                @foreach (var join in Model.JoinEntities)
+                {
+                  <!-- Button trigger modal -->
+                  <p>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#flavor_@(join.FlavorTreatId)">
+                      Delete
+                    </button>
+                    - @Html.ActionLink($"{join.Flavor.Name}", "Details", "Flavors", new { id= join.Flavor.FlavorId })
+                  </p>
+                  <!-- Modal -->
+                  <div class="modal fade" id="flavor_@(join.FlavorTreatId)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="flavor_@(join.FlavorTreatId)Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="flavor_@(join.FlavorTreatId)Label">Delete Flavor: @join.Flavor.Name</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Are you sure you want to delete @join.Flavor.Name from @Model.Name?</p>
+                          <p>If you want to re-add @Model.Name to the @join.Flavor.Name tag you will need to reassign it manually.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          @using (Html.BeginForm("DeleteFlavor", "Treats"))
+                          {
+                            @Html.Hidden("joinId", @join.FlavorTreatId)
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                          }
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                }
+              </ul>
             }
-          </ul>
-        }
-        else
-        {
-          <ul>
-            @foreach (var join in Model.JoinEntities)
+            else
             {
-              <li>@Html.ActionLink($"{join.Flavor.Name}", "Details", "Flavors", new { id= join.Flavor.FlavorId })</li>
+              <ul>
+                @foreach (var join in Model.JoinEntities)
+                {
+                  <li>@Html.ActionLink($"{join.Flavor.Name}", "Details", "Flavors", new { id= join.Flavor.FlavorId })</li>
+                }
+              </ul>
             }
-          </ul>
-        }
-      }
-      @if (User.Identity.IsAuthenticated)
-      {
-        @using (Html.BeginForm("AddFlavor", "Treats"))
-        {
-          @Html.HiddenFor(model => model.TreatId)
+          }
+          @if (User.Identity.IsAuthenticated)
+          {
+            @using (Html.BeginForm("AddFlavor", "Treats"))
+            {
+              @Html.HiddenFor(model => model.TreatId)
 
-          <div class="mb-3">
-            @Html.Label("Add flavor tag")
-            @Html.DropDownList("FlavorId", ViewBag.FlavorId, "Add selection", new { @class = "form-control col-md-5"})
-          </div>
+              <div class="mb-3">
+                @Html.Label("Add flavor tag")
+                @Html.DropDownList("FlavorId", ViewBag.FlavorId, "Add selection", new { @class = "form-control col-md-5"})
+              </div>
 
-          <input type="submit" value="Add flavor" class="btn btn-dark col-md-5" />
-        }
-      }
+              <input type="submit" value="Add flavor" class="btn btn-dark col-md-5" />
+            }
+          }
+        </div>
+      </div>
     </div>
   </div>
 </div>
