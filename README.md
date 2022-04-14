@@ -15,6 +15,12 @@
 
 A web application for marketing Pierres sweet and savory treats.
 
+## Planned features
+
+* Community treats sharing.
+* Public and Private treats.
+* Better validation with better error messages.
+
 ## Setup/Installation Requirements
 
 * Make sure you have MySql Workbench installed on your computer.
@@ -63,7 +69,7 @@ Example of complete appsettings.json:
 
 ## Known Bugs
 
-* _Editing a new image onto a treat doesnt delete the old picture from the directory._
+* _No known bugs._
 
 ## Contact Me
 
