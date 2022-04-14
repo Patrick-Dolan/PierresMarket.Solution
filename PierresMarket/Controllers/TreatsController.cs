@@ -97,7 +97,7 @@ namespace PierresMarket.Controllers
       if (treat.ImageFile != null)
       {
         //Delete old image
-        //TODO write code to delete old image from ~/img/TreatImages/
+        await DeleteImage(treat.TreatId);
         //Create new image
         string wwwRootPath = _hostEnvironment.WebRootPath;
         string fileName = Path.GetFileNameWithoutExtension(treat.ImageFile.FileName);
@@ -125,6 +125,17 @@ namespace PierresMarket.Controllers
         .ThenInclude(join => join.JoinEntities)
         .FirstOrDefault(entry => entry.TreatId == id);
       return View(foundTreat);
+    }
+
+    public async Task<IActionResult> DeleteImage(int id)
+    {
+      Treat foundTreat = await _db.Treats.AsNoTracking().FirstOrDefaultAsync(treat => treat.TreatId == id);
+      var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "img/TreatImages/", foundTreat.ImageName);
+      if (System.IO.File.Exists(imagePath))
+      {
+        System.IO.File.Delete(imagePath);
+      }
+      return null;
     }
 
     [HttpPost, ActionName("Delete")]
