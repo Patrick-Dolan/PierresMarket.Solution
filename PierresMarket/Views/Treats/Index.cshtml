@@ -18,13 +18,27 @@ else
     {
       <div class="col">
         <div class="card border-primary mb-3">
-          <div class="card-body">
-            <h5 class="card-title">@Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId})</h5>
-            <hr>
-            <h6>Price</h6>
-            <p class="card-text">$@treat.Price.00</p>
-            <h6>Description</h6>
-            <p class="card-text">@treat.Description</p>
+          <div class="row g-0">
+            <div class="col-md-4">
+              @if (treat.ImageName == null)
+              {
+                <img src='~/img/DefaultTreatImage.png' class="img-thumbnail treat-index-image rounded mr-3 bg-light px-2 py-2 details-image">
+              }
+              else
+              {
+                <img src='@Url.Content("~/img/TreatImages/" + treat.ImageName)' class="img-thumbnail treat-index-image rounded mr-3 bg-light px-2 py-2">
+              }
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">@Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId})</h5>
+                <hr>
+                <h6>Price</h6>
+                <p class="card-text">$@treat.Price.00</p>
+                <h6>Description</h6>
+                <p class="card-text">@treat.Description</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
