@@ -23,10 +23,24 @@ else
         @foreach (Treat treat in Model)
         {
           <div class="card border-primary mb-3">
-            <div class="card-body">
-              <h5 class="card-title">@Html.ActionLink($"{treat.Name}", "Details", "Treats", new { id = treat.TreatId})</h5>
-              <hr>
-              <p class="card-text">@treat.Description</p>
+            <div class="row g-0">
+              <div class="col-md-3">
+                @if (treat.ImageName == null)
+                {
+                  <img src='~/img/DefaultTreatImage.png' class="img-thumbnail treat-index-image rounded mr-3 bg-light px-2 py-2 details-image">
+                }
+                else
+                {
+                  <img src='@Url.Content("~/img/TreatImages/" + treat.ImageName)' class="img-thumbnail treat-index-image rounded mr-3 bg-light px-2 py-2">
+                }
+              </div>
+              <div class="col-md-9">
+                <div class="card-body">
+                  <h5 class="card-title">@Html.ActionLink($"{treat.Name}", "Details", "Treats", new { id = treat.TreatId})</h5>
+                  <hr>
+                  <p class="card-text">@treat.Description</p>
+                </div>
+              </div>
             </div>
           </div>
         }
