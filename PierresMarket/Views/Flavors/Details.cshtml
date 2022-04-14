@@ -5,6 +5,14 @@
 @model PierresMarket.Models.Flavor
 
 <h2>Flavor Details</h2>
+<ul class="nav">
+  <li class="nav-item">
+    <a class="nav-link" href='@Url.Action("Edit", "Flavors", new { id = Model.FlavorId})'>Edit Flavor</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href='@Url.Action("Delete", "Flavors", new { id = Model.FlavorId})'>Delete Flavor</a>
+  </li>
+</ul>
 
 <div class="col">
   <div class="card border-primary mb-3">
@@ -83,6 +91,3 @@
     </div>
   </div>
 </div>
-
-<p>@Html.ActionLink("Edit treat", "Edit", new { id = Model.FlavorId})</p>
-<p>@Html.ActionLink("Delete treat", "Delete", new { id = Model.FlavorId})</p>

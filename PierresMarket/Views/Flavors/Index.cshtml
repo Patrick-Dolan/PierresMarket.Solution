@@ -6,7 +6,12 @@
 @model List<PierresMarket.Models.Flavor>
 
 <h2>Flavors</h2>
-<p>@Html.ActionLink("Add flavor", "Create")</p>
+<ul class="nav">
+  <li class="nav-item">
+    <a class="nav-link" href='@Url.Action("Create", "Flavors")'>Add new flavor</a>
+  </li>
+</ul>
+
 @if (Model.Count == 0)
 {
   <p>No flavors added yet.</p>
