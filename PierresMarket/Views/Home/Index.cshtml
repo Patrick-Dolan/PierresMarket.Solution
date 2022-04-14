@@ -60,7 +60,7 @@ else
         <div class="list-group">
           @foreach (Flavor flavor in ViewBag.Flavors)
           {
-            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href='@Url.Action("Details", "Flavors", new { id = flavor.FlavorId})'>
+            <a class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center" href='@Url.Action("Details", "Flavors", new { id = flavor.FlavorId})'>
               @flavor.Name
               <span class="badge bg-primary rounded-pill">@flavor.JoinEntities.Count</span>
             </a>
