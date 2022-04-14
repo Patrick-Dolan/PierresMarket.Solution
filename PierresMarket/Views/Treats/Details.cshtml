@@ -5,6 +5,14 @@
 @model PierresMarket.Models.Treat
 
 <h2>Treat Details</h2>
+<ul class="nav">
+  <li class="nav-item">
+    <a class="nav-link" href='@Url.Action("Edit", "Treats", new { id = Model.TreatId})'>Edit</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href='@Url.Action("Delete", "Treats", new { id = Model.TreatId})'>Delete</a>
+  </li>
+</ul>
 
 <div class="col">
   <div class="card border-primary mb-3">
@@ -100,6 +108,3 @@
     </div>
   </div>
 </div>
-
-<p>@Html.ActionLink("Edit treat", "Edit", new { id = Model.TreatId})</p>
-<p>@Html.ActionLink("Delete treat", "Delete", new { id = Model.TreatId})</p>
