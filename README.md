@@ -63,7 +63,7 @@ Example of complete appsettings.json:
 
 ## Known Bugs
 
-* _No known issues_
+* _Editing a new image onto a treat doesnt delete the old picture from the directory._
 
 ## Contact Me
 
