@@ -83,7 +83,7 @@ namespace PierresMarket.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Treat treat, int FlavorId)
+    public async Task<IActionResult> Edit(Treat treat, int FlavorId)
     {
       if (treat.Name == null || treat.Price == 0 || treat.Description == null)
       {
@@ -93,8 +93,28 @@ namespace PierresMarket.Controllers
       {
         _db.FlavorTreats.Add(new FlavorTreat { TreatId = treat.TreatId, FlavorId = FlavorId});
       }
+      // handle image changes
+      if (treat.ImageFile != null)
+      {
+        //Delete old image
+        //TODO write code to delete old image from ~/img/TreatImages/
+        //Create new image
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        string fileName = Path.GetFileNameWithoutExtension(treat.ImageFile.FileName);
+        string extention = Path.GetExtension(treat.ImageFile.FileName);
+        treat.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssffff") + extention;
+        string path = Path.Combine(wwwRootPath + "/img/TreatImages/", fileName);
+        using (var fileStream = new FileStream(path, FileMode.Create))
+        {
+          await treat.ImageFile.CopyToAsync(fileStream);
+        }
+      }
       _db.Entry(treat).State = EntityState.Modified;
-      _db.SaveChanges();
+      if (treat.ImageFile == null)
+      {
+        _db.Entry(treat).Property(treat => treat.ImageName).IsModified=false;
+      }
+      await _db.SaveChangesAsync();
       return RedirectToAction("Details", new { id = treat.TreatId});
     }
 
