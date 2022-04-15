@@ -32,6 +32,10 @@ namespace ToDoList.Controllers
         [HttpPost]
         public async Task<ActionResult> Register (RegisterViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Register");
+            }
             var user = new ApplicationUser { UserName = model.Email };
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
