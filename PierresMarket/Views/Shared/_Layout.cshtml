@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="~/css/styles.css">
   </head>
   <body>
-    <div class="container">
+    <div class="container d-flex flex-column min-vh-100">
       <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark mb-3">
         <div class="container-fluid">
           <a href='@Url.Action("Index", "Home")' class='navbar-brand @(pageName == "Home" ? "active" : "")'>
@@ -66,7 +66,7 @@
         </div>
       </nav>
       @RenderBody()
-      <footer class="footer mt-1 py-3 bg-dark text-white">
+      <footer class="footer mt-auto py-3 bg-dark text-white bottom-0">
         <div class="container">
           <a href="https://github.com/Patrick-Dolan/" class="text-white">Patrick Dolan</a><br>
           <a href="https://github.com/Patrick-Dolan/PierresMarket.Solution" class="text-white">Github Link</a>
