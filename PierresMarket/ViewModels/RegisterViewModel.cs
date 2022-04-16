@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace PierresMarket.ViewModels
 {
@@ -33,5 +35,9 @@ namespace PierresMarket.ViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string ImageName { get; set; }
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
     }
 }
