@@ -21,7 +21,13 @@ namespace ToDoList.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var userId = _userManager.GetUserId(HttpContext.User);
+            if (userId == null)
+            {
+                return RedirectToAction("Login");
+            }
+            ApplicationUser user = _userManager.FindByIdAsync(userId).Result;
+            return View(user);
         }
 
         public IActionResult Register()
