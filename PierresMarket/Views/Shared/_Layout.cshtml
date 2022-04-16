@@ -36,7 +36,9 @@
               <li class="nav-item dropdown">
                 @if(User.Identity.IsAuthenticated)
                 {
-                  <a class='nav-link dropdown-toggle @(pageName == "Account" ? "active" : "")' data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">@User.Identity.Name</a>
+                  <a class='nav-link dropdown-toggle @(pageName == "Account" ? "active" : "")' data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                    <img src="~/img/DefaultUserPFP.png" id="navbar-pfp" class="rounded-circle" alt="Default profile image." height="30">
+                  </a>
                 }
                 else
                 {
@@ -50,6 +52,8 @@
                   }
                   else
                   {
+                    <li class="dropdown-item disabled">@User.Identity.Name</li>
+                    <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href='@Url.Action("Index", "Account")'>My account</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
