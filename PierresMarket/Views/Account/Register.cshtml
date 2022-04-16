@@ -14,6 +14,16 @@
       <h2 class="text-center">Sign up</h2>
       <hr>
       <div class="mb-3">
+        @Html.LabelFor(user => user.FirstName, new { @class = "form-label"})
+        @Html.TextBoxFor(user=> user.FirstName, new { @class = "form-control", required="required"})
+        @Html.ValidationMessageFor(user => user.FirstName)
+      </div>
+      <div class="mb-3">
+        @Html.LabelFor(user => user.LastName, new { @class = "form-label"})
+        @Html.TextBoxFor(user=> user.LastName, new { @class = "form-control", required="required"})
+        @Html.ValidationMessageFor(user => user.LastName)
+      </div>
+      <div class="mb-3">
         @Html.LabelFor(user => user.Email, new { @class = "form-label"})
         @Html.TextBoxFor(user=> user.Email, new { @class = "form-control", required="required"})
         @Html.ValidationMessageFor(user => user.Email)

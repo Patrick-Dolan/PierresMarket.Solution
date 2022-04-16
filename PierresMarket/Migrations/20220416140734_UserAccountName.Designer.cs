@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PierresMarket.Models;
 
 namespace PierresMarket.Migrations
 {
     [DbContext(typeof(PierresMarketContext))]
-    partial class PierresMarketContextModelSnapshot : ModelSnapshot
+    [Migration("20220416140734_UserAccountName")]
+    partial class UserAccountName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
