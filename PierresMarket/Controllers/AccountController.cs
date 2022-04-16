@@ -42,7 +42,7 @@ namespace ToDoList.Controllers
             {
                 return View("Register");
             }
-            var user = new ApplicationUser { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+            var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
@@ -66,7 +66,7 @@ namespace ToDoList.Controllers
             {
                 return View("Login");
             }
-            Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
+            Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: true, lockoutOnFailure: false);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index");

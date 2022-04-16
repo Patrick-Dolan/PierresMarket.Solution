@@ -6,6 +6,11 @@ namespace PierresMarket.ViewModels
     {
         [Required]
         [DataType(DataType.Text)]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
