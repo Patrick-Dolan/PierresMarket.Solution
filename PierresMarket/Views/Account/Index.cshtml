@@ -10,6 +10,8 @@
         <p><strong>Username: </strong>@Model.UserName</p>
         <p><strong>Name: </strong>@Model.FirstName @Model.LastName</p>
         <p><strong>Email: </strong>@Model.Email</p>
+        <img src='@Url.Content("~/img/ProfilePictures/" + Model.ImageName)' class="rounded-circle" alt="Default profile image." height="200">
+
       }
       else
       {
