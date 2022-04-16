@@ -2,18 +2,20 @@
   Layout = "_Layout";
 }
 
-<h2>Account</h2>
-
-@if (User.Identity.IsAuthenticated)
-{
-  <p>Hello @User.Identity.Name</p>
-  @using (Html.BeginForm("LogOff", "Account"))
-  {
-    <button type="submit" class="btn btn-danger">Log out</button>
-  }
-}
-else
-{
-  <p>@Html.ActionLink("Register", "Register")</p>
-  <p>@Html.ActionLink("Login", "Login")</p>
-}
+<div class="row">
+    <div class="col">
+      @if (User.Identity.IsAuthenticated)
+      {
+        <h3>Account Details</h3>
+        <p><strong>Username: </strong>@Model.UserName</p>
+        <p><strong>Name: </strong>@Model.FirstName @Model.LastName</p>
+        <p><strong>Email: </strong>@Model.Email</p>
+      }
+      else
+      {
+        <h2>Account</h2>
+        <p>@Html.ActionLink("Register", "Register")</p>
+        <p>@Html.ActionLink("Login", "Login")</p>
+      }
+  </div>
+</div>
