@@ -1,5 +1,16 @@
+@using Microsoft.AspNetCore.Identity
+@using PierresMarket.Models
+@inject UserManager<ApplicationUser> userManager
+
 @{
   string pageName = ViewContext.RouteData.Values["controller"].ToString();
+  Task<ApplicationUser> GetCurrentUserAsync() => userManager.GetUserAsync(User);
+  var user = await GetCurrentUserAsync();
+  string ImageName = null;
+  if (user != null)
+  {
+    ImageName = user.ImageName; 
+  }
 }
 
 <!DOCTYPE html>
@@ -36,9 +47,18 @@
               <li class="nav-item dropdown">
                 @if(User.Identity.IsAuthenticated)
                 {
-                  <a class='nav-link dropdown-toggle @(pageName == "Account" ? "active" : "")' data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                    <img src="~/img/DefaultUserPFP.png" id="navbar-pfp" class="rounded-circle" alt="Default profile image." height="30">
-                  </a>
+                  if (ImageName != null)
+                  {
+                    <a class='nav-link dropdown-toggle @(pageName == "Account" ? "active" : "")' data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                      <img src='@Url.Content("~/img/ProfilePictures/" + ImageName)' id="navbar-pfp" class="rounded-circle" alt="Default profile image." height="30">
+                    </a>
+                  }
+                  else
+                  {
+                    <a class='nav-link dropdown-toggle @(pageName == "Account" ? "active" : "")' data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                      <img src="~/img/DefaultUserPFP.png" id="navbar-pfp" class="rounded-circle" alt="Default profile image." height="30">
+                    </a>
+                  }
                 }
                 else
                 {
