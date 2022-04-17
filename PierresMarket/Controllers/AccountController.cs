@@ -24,15 +24,6 @@ namespace ToDoList.Controllers
             _db = db;
             _hostEnvironment = hostEnvironment;
         }
-        // public ActionResult GetImage()
-        // {
-        //     var userId = _userManager.GetUserId(HttpContext.User);
-        //     ApplicationUser user = _userManager.FindByIdAsync(userId).Result;
-        //     string image = "/img/ProfilePictures/" + user.ImageName;
-        //     string wwwRootPath = _hostEnvironment.WebRootPath;
-        //     string path = Path.Combine(wwwRootPath + "/img/ProfilePictures/", image);
-        //     return File(path, "image");
-        // }
 
         public ActionResult Index()
         {
