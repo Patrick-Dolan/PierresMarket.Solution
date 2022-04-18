@@ -7,10 +7,10 @@
 <h2>Flavor Details</h2>
 <ul class="nav">
   <li class="nav-item">
-    <a class="nav-link" href='@Url.Action("Edit", "Flavors", new { id = Model.FlavorId})'>Edit Flavor</a>
+    <a class="nav-link" href='@Url.Action("Edit", "Flavors", new { id = Model.FlavorId})'><button class="btn btn-primary">Edit Flavor</button></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href='@Url.Action("Delete", "Flavors", new { id = Model.FlavorId})'>Delete Flavor</a>
+    <a class="nav-link" href='@Url.Action("Delete", "Flavors", new { id = Model.FlavorId})'><button class="btn btn-primary">Delete Flavor</button></a>
   </li>
 </ul>
 
@@ -85,7 +85,7 @@
             @Html.DropDownList("TreatId", ViewBag.TreatId, "Add selection", new { @class = "form-control"})
           </div>
 
-          <input type="submit" value="Add treat" class="btn btn-dark  col-md-5" />
+          <input type="submit" value="Add treat" class="btn btn-primary col-md-5" />
         }
       }
     </div>
