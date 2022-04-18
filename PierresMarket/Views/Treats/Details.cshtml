@@ -7,10 +7,10 @@
 <h2>Treat Details</h2>
 <ul class="nav">
   <li class="nav-item">
-    <a class="nav-link" href='@Url.Action("Edit", "Treats", new { id = Model.TreatId})'>Edit</a>
+    <a class="nav-link" href='@Url.Action("Edit", "Treats", new { id = Model.TreatId})'><button class="btn btn-primary">Edit</button></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href='@Url.Action("Delete", "Treats", new { id = Model.TreatId})'>Delete</a>
+    <a class="nav-link" href='@Url.Action("Delete", "Treats", new { id = Model.TreatId})'><button class="btn btn-primary">Delete</button></a>
   </li>
 </ul>
 
@@ -100,7 +100,7 @@
                 @Html.DropDownList("FlavorId", ViewBag.FlavorId, "Add selection", new { @class = "form-control"})
               </div>
 
-              <input type="submit" value="Add flavor" class="btn btn-dark col-md-5" />
+              <input type="submit" value="Add flavor" class="btn btn-primary col-md-5" />
             }
           }
         </div>
