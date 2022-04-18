@@ -19,7 +19,6 @@ A web application for marketing Pierres sweet and savory treats.
 
 * Community treats sharing.
 * Public and Private treats.
-* Better validation with better error messages.
 
 ## Setup/Installation Requirements
 
