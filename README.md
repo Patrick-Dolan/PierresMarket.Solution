@@ -21,6 +21,7 @@ A web application for marketing Pierres sweet and savory treats. The web applica
 
 * Community treats sharing.
 * Public and Private treats.
+* Add tighter authorization and user roles so that only the owner and admins can delete treats or change public/private status.
 
 ## Setup/Installation Requirements
 
