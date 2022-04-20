@@ -4,6 +4,8 @@
 
 #### _A web application for marketing Pierres sweet and savory treats._
 
+<!-- ![Demonstration Gif]() -->
+
 ## Technologies Used
 
 * C#
