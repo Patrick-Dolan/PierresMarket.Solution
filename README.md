@@ -15,7 +15,7 @@
 
 ## Description
 
-A web application for marketing Pierres sweet and savory treats.
+A web application for marketing Pierres sweet and savory treats. The web application requires a user account before you can create, edit, and delete treats or change their associations to flavors but you dont need an account to view the data. Flavors and Treats include full CRUD and I have plans to add it for user acccounts as well as roles. The Plan for the application is to make it so that "Pierre" has admin rights and is a featured account on the main page and otherwise the rest of the site is for users to share their treats. 
 
 ## Planned features
 
