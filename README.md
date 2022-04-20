@@ -4,7 +4,7 @@
 
 #### _A web application for marketing Pierres sweet and savory treats._
 
-<!-- ![Demonstration Gif]() -->
+![Demonstration Gif](https://github.com/Patrick-Dolan/PierresMarket.Solution/blob/main/DemoGifs/BasicFunctionality.gif)
 
 ## Technologies Used
 
