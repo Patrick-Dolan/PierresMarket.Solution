@@ -53,8 +53,6 @@ Example of complete appsettings.json:
 * Make sure to run your mysql server and open MySql workbench.
 * Open MySql Workbench and login to your server.
 * From your terminal navigate to the <code>PierresMarket/</code> folder and run the command <code>dotnet ef database update</code> to create the database from migrations.
-* Now using your IDE navigate into the PierresMarket.Solution/PierresMarket folder and use the command dotnet run to launch the program.
-* The site should be available at the server address you used in the appsettings.json folder.
 * Now using your IDE in the PierresMarket.Solution/PierresMarket/ folder use the command <code>dotnet run</code> to launch the program. 
 * The site should be available at the server address you used in the <code>appsettings.json</code> folder.
 
